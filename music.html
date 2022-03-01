@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="style.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Shippori+Antique+B1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main_div">
+
+  <div class="music_container">
+  <h2 id="title">The Nights</h2>
+  <h3 id="artist">The Loyalist</h3>
+  <br></br>
+  <div> </div>
+  <div class="img_container">
+      <img src="images/sailish-1.jpg" alt="">
+  </div>
+
+  <audio src="music/sailish-1.mp3"></audio>
+<!-----controls-->
+
+
+
+<div class="music_control">
+    <i class="fa-solid fa-backward" id="prev" title="Previous"></i>
+    <i class="fa-solid fa-play main-button" id="play" title="Play"></i>
+    <i class="fa-solid fa-forward" id="next" title="Next"></i>
+
+
+
+
+</div>
+
+
+  </div>
+
+    </div>
+
+    <script>
+        const music= document.querySelector("audio");
+        const img= document.querySelector("img");
+        const play= document.getElementById("play");
+        const artist= document.getElementById("artist");
+        const title=document.getElementById("title");
+        const prev= document.getElementById("prev");
+        const next= document.getElementById("next" );
+        const songs=[
+        {
+            name:"sailish-1",
+            title:"Brown Munde",
+            artist:"AP Dhillon",
+        },
+        {
+            name:"sailish-2",
+            title:"Last Day on Earth",
+            artist:"Tai Verdas",
+        },
+
+        {
+            name:"sailish-3",
+            title:"The Nights",
+            artist:"Avici",
+        },
+
+
+
+
+        ]
+            
+        let isPlaying=false;
+
+//for play function
+       const playMusic=() =>{
+           
+            isPlaying=true;
+            music.play();
+            
+            play.classList.replace("fa-play","fa-pause");
+            img.classList.add("anime");
+
+        }
+        //for pause function
+       const pauseMusic= () =>{
+           
+            isPlaying=false;
+            music.pause();
+            
+            play.classList.replace("fa-pause","fa-play");
+            img.classList.remove("anime");
+
+        }
+
+        play.addEventListener("click", () =>{
+           isPlaying? pauseMusic(): playMusic();
+
+        })
+        
+
+         const loadSong= (songs) => {
+             title.textContent= songs.title;
+            artist.textContent= songs.artist;
+            music.src = "music/" + songs.name + ".mp3";
+            img.src= "images/" + songs.name + ".jpg";
+            
+
+         };
+
+
+         songIndex=0;
+        const nextSong= ()=> {
+            songIndex=(songIndex+1)% songs.length;
+            loadSong(songs[songIndex]);
+            playMusic();
+            
+
+        };
+
+        const prevSong= ()=> {
+            songIndex=(songIndex-1 + songs.length)% songs.length;
+            loadSong(songs[songIndex]);
+            playMusic();
+            
+
+        };
+
+
+
+        next.addEventListener("click",nextSong);
+        prev.addEventListener("click",prevSong);
+
+        
+
+        //changing musictraack
+
+
+        
+        
+        
+    </script>
+
+   
+</body>
+
+</html>
